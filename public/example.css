@@ -1,41 +1,104 @@
-.iframeWindow {
-    position: absolute;
-    width: 100vw;
-    height: 90vh;
-    border: 0;
-    padding: 0;
+* {
     margin: 0;
-    left: 0;
-    bottom: 0;
-    background-color: #fff;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #0b0c10;
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Background Glowing Effect */
+body::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(111,66,193,0.3) 0%, rgba(0,0,0,0) 70%);
+    top: 10%;
+    left: 15%;
+    z-index: 0;
+}
+
+.container {
+    text-align: center;
+    z-index: 10;
+    width: 90%;
+    max-width: 600px;
+}
+
+.logo {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: #fff;
+    margin-bottom: 5px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.logo span {
+    color: #6f42c1; /* Theme accent color (Purple) */
+    text-shadow: 0 0 15px rgba(111, 66, 193, 0.6);
+}
+
+.subtitle {
+    color: #c5c6c7;
+    font-size: 1rem;
+    margin-bottom: 40px;
+}
+
+/* Centralized Modern Search Box */
+#proxyForm {
+    display: flex;
+    background: rgba(31, 40, 51, 0.6);
+    border: 2px solid #45f3ff00;
+    border-radius: 50px;
+    padding: 8px 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+#proxyForm:focus-within {
+    border-color: #6f42c1;
+    box-shadow: 0 0 20px rgba(111, 66, 193, 0.4);
 }
 
 #urlInput {
-    position: absolute;
-    padding: 0em;
-    padding-left: 0.5em;
-    margin: 0;
-    left: 0;
-    top: 0;
-    width: 80vw;
-    height: 10vh;
-    border: 0;
-    outline: 0;
-    color: aliceblue;
-    background-color: #25252a;
-    font-size: 5vh;
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    padding: 10px 20px;
 }
 
-#searchButton {
-    position: absolute;
-    margin: 0;
-    right: 0;
-    top: 0;
-    width: 20vw;
-    height: 10vh;
-    border: 0;
-    outline: 0;
-    color: #141414;
-    background-color: aliceblue;
-    font-size: 5vh;
+#urlInput::placeholder {
+    color: #858585;
+}
+
+button {
+    background: #6f42c1;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background: #5a32a3;
+    transform: scale(1.03);
 }
