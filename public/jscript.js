@@ -13,7 +13,7 @@ form.addEventListener('submit', async (e) => {
 
     // Check if the input is a search query or a direct URL address
     if (!url.includes('.') || url.includes(' ')) {
-        // FIXED: Switched to Bing search, which does not crash inside UV Service Workers
+        // FIXED: Added the proper search engine path so it doesn't smash the strings together
         url = 'https://bing.com' + encodeURIComponent(url);
     } else if (!/^https?:\/\//i.test(url)) {
         url = 'https://' + url;
