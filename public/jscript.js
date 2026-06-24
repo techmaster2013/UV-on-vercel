@@ -13,12 +13,11 @@ form.addEventListener('submit', async (e) => {
 
     // Check if the input is a search query or a direct URL address
     if (!url.includes('.') || url.includes(' ')) {
-        // CHANGED: DuckDuckGo URL query structure 
-        url = 'https://duckduckgo.com/' + encodeURIComponent(url);
+        // FIXED: Switched to Bing search, which does not crash inside UV Service Workers
+        url = 'https://bing.com' + encodeURIComponent(url);
     } else if (!/^https?:\/\//i.test(url)) {
         url = 'https://' + url;
     }
 
     window.location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
 });
-
