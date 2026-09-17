@@ -6,22 +6,24 @@
     <title>ProxyPlaza</title>
     <link rel="icon" href="/Proxy.png">
     <link rel="stylesheet" href="style.css">
-    <!-- Ultraviolet Scripts Needed to Route Requests -->
     <script src="/uv/uv.bundle.js" defer></script>
     <script src="/uv/uv.config.js" defer></script>
-    <script src="jscript.js?v=2" defer></script>
+    <script src="jscript.js?v=3" defer></script>
 </head>
 <body>
     <div class="particles" id="particles"></div>
-    
     <div class="container">
-        <h1 class="logo">Proxy<span>Plaza</span></h1>
-        <p class="subtitle">Explore the web without restrictions.</p>
-        
-        <form id="proxyForm">
-            <input type="text" id="urlInput" placeholder="Search Bing or type a URL..." autocomplete="off">
-            <button type="submit">Search</button>
-        </form>
+        <div class="topbar"><div class="brand-wrap"><h1 class="logo">Proxy<span>Plaza</span></h1><span class="status-pill"><i></i> Ready</span></div><button class="icon-button" id="settingsButton" type="button" aria-label="Open settings">⚙</button></div>
+        <p class="subtitle">A simple web gateway with your own bookmarks, history, and preferences.</p>
+        <form id="proxyForm"><input type="text" id="urlInput" placeholder="Search Bing or type a URL..." autocomplete="off"><button type="submit">Search</button></form>
+        <p class="error-message" id="errorMessage" role="alert" hidden></p>
+        <div class="quick-actions"><button class="secondary-button" id="bookmarksButton" type="button">☆ Bookmarks</button><button class="secondary-button" id="historyButton" type="button">◷ History</button><button class="secondary-button" id="clearHistoryButton" type="button">Clear History</button></div>
+        <section class="dashboard" aria-label="ProxyPlaza dashboard"><div class="dashboard-card"><span>Bookmarks</span><strong id="bookmarkCount">0</strong></div><div class="dashboard-card"><span>History</span><strong id="historyCount">0</strong></div><div class="dashboard-card"><span>Status</span><strong>Ready</strong></div></section>
+        <section class="list-panel" id="bookmarkPanel" hidden><div class="panel-heading"><h2>Bookmarks</h2><button class="close-panel" data-close="bookmarkPanel" type="button">×</button></div><div id="bookmarkList" class="saved-list"></div></section>
+        <section class="list-panel" id="historyPanel" hidden><div class="panel-heading"><h2>History</h2><button class="close-panel" data-close="historyPanel" type="button">×</button></div><div id="historyList" class="saved-list"></div></section>
+        <p class="security-note">Anti-abuse protection can be enabled server-side with rate limiting and reCAPTCHA keys.</p>
+        <footer>ProxyPlaza • GamePlaza ecosystem • <a href="https://gameplaza.vercel.app">GamePlaza</a></footer>
     </div>
+    <div class="settings-overlay" id="settingsOverlay" hidden><div class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="panel-heading"><h2 id="settingsTitle">ProxyPlaza Settings</h2><button class="close-panel" id="closeSettings" type="button">×</button></div><label class="setting-row"><span>Theme</span><select id="themeSelect"><option value="plaza">Plaza Dark</option><option value="midnight">Midnight</option><option value="light">Light</option></select></label><label class="setting-row"><span>Save history</span><input id="historyToggle" type="checkbox" checked></label><label class="setting-row"><span>Reduce animations</span><input id="animationToggle" type="checkbox"></label><button id="saveSettings" type="button">Save Settings</button></div></div>
 </body>
 </html>
