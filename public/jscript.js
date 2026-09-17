@@ -112,7 +112,7 @@ document.getElementById('refreshButton')?.addEventListener('click', () => window
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         if (window.__uv$config) {
-            navigator.serviceWorker.register('/uv/sw.js', { scope: __uv$config.prefix })
+            navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix })
                 .catch(() => showError('Proxy service worker could not be registered.'));
         }
     });
@@ -143,13 +143,16 @@ form?.addEventListener('submit', (e) => {
         return;
     }
 
-    window.location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
+    const destination = __uv$config.prefix + __uv$config.encodeUrl(url);
+window.location.assign(destination);
 });
 
 document.getElementById('whyBing')?.addEventListener('click', () => {
     const panel = document.getElementById('whyBingPanel');
     if (!panel) return;
     panel.hidden = !panel.hidden;
+    const button = document.getElementById('whyBing');
+    if (button) button.setAttribute('aria-expanded', String(!panel.hidden));
 });
 
 document.getElementById('bookmarksButton')?.addEventListener('click', () => {
