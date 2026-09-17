@@ -1,104 +1,30 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, sans-serif;
+:root {
+    --purple: #7b1fa2;
+    --violet: #673ab7;
+    --pink: #f48fb1;
+    --bg: #0d0619;
+    --panel: #190f26;
+    --panel-hover: #25163a;
+    --text: #f9f6ef;
+    --muted: #aaa;
 }
 
-body {
-    background-color: #0b0c10;
-    color: #ffffff;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-}
-
-/* Background Glowing Effect */
-body::before {
-    content: '';
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(111,66,193,0.3) 0%, rgba(0,0,0,0) 70%);
-    top: 10%;
-    left: 15%;
-    z-index: 0;
-}
-
-.container {
-    text-align: center;
-    z-index: 10;
-    width: 90%;
-    max-width: 600px;
-}
-
-.logo {
-    font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: 4px;
-    color: #fff;
-    margin-bottom: 5px;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-}
-
-.logo span {
-    color: #6f42c1; /* Theme accent color (Purple) */
-    text-shadow: 0 0 15px rgba(111, 66, 193, 0.6);
-}
-
-.subtitle {
-    color: #c5c6c7;
-    font-size: 1rem;
-    margin-bottom: 40px;
-}
-
-/* Centralized Modern Search Box */
-#proxyForm {
-    display: flex;
-    background: rgba(31, 40, 51, 0.6);
-    border: 2px solid #45f3ff00;
-    border-radius: 50px;
-    padding: 8px 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-#proxyForm:focus-within {
-    border-color: #6f42c1;
-    box-shadow: 0 0 20px rgba(111, 66, 193, 0.4);
-}
-
-#urlInput {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #ffffff;
-    font-size: 1.1rem;
-    padding: 10px 20px;
-}
-
-#urlInput::placeholder {
-    color: #858585;
-}
-
-button {
-    background: #6f42c1;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 10px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s ease;
-}
-
-button:hover {
-    background: #5a32a3;
-    transform: scale(1.03);
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Ubuntu', sans-serif; }
+html, body { min-height: 100%; }
+body { min-height:100vh; display:flex; justify-content:center; align-items:center; overflow:hidden; position:relative; color:var(--text); background:radial-gradient(circle at 20% 10%,rgba(123,31,162,.25),transparent 30%),radial-gradient(circle at 80% 30%,rgba(244,143,177,.12),transparent 25%),linear-gradient(-45deg,#1a0f2e,#0f0820,#1f1240,#0d0619); background-size:400% 400%; animation:gradientShift 15s ease infinite; }
+body::before, body::after { content:''; position:absolute; width:320px; height:320px; border-radius:50%; pointer-events:none; filter:blur(10px); }
+body::before { background:radial-gradient(circle,rgba(123,31,162,.28) 0%,transparent 70%); top:-80px; left:-70px; }
+body::after { background:radial-gradient(circle,rgba(244,143,177,.12) 0%,transparent 70%); right:-80px; bottom:-100px; }
+@keyframes gradientShift { 0%,100%{background-position:0 50%} 50%{background-position:100% 50%} }
+.container { position:relative; z-index:2; width:min(700px,92vw); padding:48px 36px; text-align:center; border:1px solid rgba(244,143,177,.25); border-radius:24px; background:rgba(25,15,38,.72); box-shadow:0 20px 60px rgba(0,0,0,.35),0 0 40px rgba(123,31,162,.12); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+.logo { margin-bottom:10px; font-size:clamp(2.7rem,8vw,5rem); font-weight:500; letter-spacing:1px; line-height:1.05; background:linear-gradient(90deg,var(--purple),var(--violet),var(--pink),var(--purple)); background-size:250%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:backgroundPan 4s linear infinite; }
+@keyframes backgroundPan { from{background-position:0 center} to{background-position:-250% center} }
+.subtitle { color:#c6bfd0; font-size:1rem; margin-bottom:30px; }
+#proxyForm { display:flex; align-items:center; gap:8px; padding:8px; border:1px solid rgba(123,31,162,.55); border-radius:16px; background:rgba(15,15,15,.72); box-shadow:0 10px 30px rgba(0,0,0,.35); transition:.25s ease; }
+#proxyForm:focus-within { border-color:var(--pink); box-shadow:0 0 20px rgba(123,31,162,.35); }
+#urlInput { flex:1; min-width:0; padding:14px 16px; border:0; outline:0; color:var(--text); background:transparent; font-size:1rem; }
+#urlInput::placeholder { color:#777; }
+button { border:2px solid var(--purple); border-radius:12px; padding:13px 24px; color:#fff; background:linear-gradient(135deg,var(--purple),var(--violet)); font-size:15px; font-weight:600; cursor:pointer; transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease; }
+button:hover { transform:translateY(-3px); border-color:var(--pink); box-shadow:0 8px 25px rgba(123,31,162,.4); }
+button:active { transform:scale(.98); }
+@media (max-width:560px) { .container{padding:36px 20px} #proxyForm{flex-direction:column} #urlInput,#proxyForm button{width:100%} }
