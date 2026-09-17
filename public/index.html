@@ -1,86 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProxyPlaza</title>
-    <link rel="icon" href="/Proxy.png">
-    <link rel="stylesheet" href="style.css">
-    <script src="/uv/uv.bundle.js" defer></script>
-    <script src="/uv/uv.config.js" defer></script>
-    <script src="jscript.js?v=4" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProxyPlaza</title>
+<link rel="icon" href="/Proxy.png">
+<link rel="stylesheet" href="style.css">
+<script src="/uv/uv.bundle.js" defer></script>
+<script src="/uv/uv.config.js" defer></script>
+<script src="jscript.js?v=5" defer></script>
 </head>
 <body>
-    <header class="scroll-banner visible" aria-label="ProxyPlaza">
-        <div class="scroll-banner-inner">
-            <a class="scroll-banner-link" href="#main">
-                <img src="/Proxy.png" alt="" class="scroll-banner-icon">
-                <span>ProxyPlaza</span>
-            </a>
-            <div class="scroll-banner-actions">
-                <a class="scroll-banner-gameplaza" href="https://gameplaza.vercel.app">GamePlaza</a>
-                <button class="scroll-banner-settings" id="settingsButton" type="button">Settings</button>
-            </div>
-        </div>
-    </header>
+<canvas id="particles"></canvas>
 
-    <div class="container" id="main">
-        <main>
-            <h1><span class="magic-text">ProxyPlaza</span></h1>
-            <p class="subtitle">A clean, Plaza-style web gateway with bookmarks, history, and a familiar browser-like search bar.</p>
+<div class="landing" id="main">
+<main>
+<div class="brand">
+<img src="/Proxy.png" alt="" class="landing-icon">
+<h1><span class="magic-text">ProxyPlaza</span></h1>
+</div>
+<p class="subtitle">A clean Plaza-style web gateway with bookmarks, history, and a familiar browser-like search bar.</p>
 
-            <form id="proxyForm" class="omnibox" autocomplete="off">
-                <div class="omni-nav" aria-label="Browser controls">
-                    <button type="button" class="omni-icon" id="backButton" aria-label="Back">‹</button>
-                    <button type="button" class="omni-icon" id="refreshButton" aria-label="Refresh">↻</button>
-                </div>
-                <input type="text" id="urlInput" placeholder="Search Bing or type a URL..." autocomplete="off" spellcheck="false">
-                <button type="button" class="bookmark-star" id="bookmarkStar" aria-label="Bookmark current address" title="Bookmark">☆</button>
-                <button type="submit" class="return-button" aria-label="Go">↵</button>
-            </form>
+<form id="proxyForm" class="landing-search" autocomplete="off">
+<input type="text" id="urlInput" placeholder="Search Bing or type a URL..." autocomplete="off" spellcheck="false">
+<button type="submit" aria-label="Go">↵</button>
+</form>
 
-            <button class="why-bing" id="whyBing" type="button"><span>?</span> Why Bing?</button>
-            <div class="why-bing-panel" id="whyBingPanel" hidden>
-                <strong>Why Bing?</strong>
-                <p>Google can trigger anti-bot checks and reCAPTCHA challenges when requests come through unusual or shared network paths. Bing is used here because it tends to be simpler for the landing-page search flow.</p>
-            </div>
+<button class="why-bing" id="whyBing" type="button"><span>?</span> Why Bing?</button>
+<div class="why-bing-panel" id="whyBingPanel" hidden>
+<strong>Why Bing?</strong>
+<p>Google can sometimes trigger anti-bot checks or reCAPTCHA challenges on unusual or shared network traffic. Bing is used here because it keeps the landing-page search flow simpler.</p>
+</div>
 
-            <p class="error-message" id="errorMessage" role="alert" hidden></p>
+<p class="error-message" id="errorMessage" role="alert" hidden></p>
 
-            <div class="quick-actions">
-                <button class="secondary-button" id="bookmarksButton" type="button">☆ Bookmarks</button>
-                <button class="secondary-button" id="historyButton" type="button">◷ History</button>
-                <button class="secondary-button" id="clearHistoryButton" type="button">Clear History</button>
-            </div>
+<div class="quick-actions">
+<button class="secondary-button" id="bookmarksButton" type="button">☆ Bookmarks</button>
+<button class="secondary-button" id="historyButton" type="button">◷ History</button>
+<button class="secondary-button" id="clearHistoryButton" type="button">Clear History</button>
+<button class="secondary-button" id="settingsButton" type="button">Settings</button>
+</div>
 
-            <section class="dashboard" aria-label="ProxyPlaza dashboard">
-                <div class="dashboard-card"><span>Bookmarks</span><strong id="bookmarkCount">0</strong></div>
-                <div class="dashboard-card"><span>History</span><strong id="historyCount">0</strong></div>
-                <div class="dashboard-card"><span>Status</span><strong>Ready</strong></div>
-            </section>
+<section class="dashboard" aria-label="ProxyPlaza dashboard">
+<div class="dashboard-card"><span>Bookmarks</span><strong id="bookmarkCount">0</strong></div>
+<div class="dashboard-card"><span>History</span><strong id="historyCount">0</strong></div>
+<div class="dashboard-card"><span>Status</span><strong>Ready</strong></div>
+</section>
 
-            <section class="list-panel" id="bookmarkPanel" hidden>
-                <div class="panel-heading"><h2>Bookmarks</h2><button class="close-panel" data-close="bookmarkPanel" type="button">×</button></div>
-                <div id="bookmarkList" class="saved-list"></div>
-            </section>
-            <section class="list-panel" id="historyPanel" hidden>
-                <div class="panel-heading"><h2>History</h2><button class="close-panel" data-close="historyPanel" type="button">×</button></div>
-                <div id="historyList" class="saved-list"></div>
-            </section>
+<section class="list-panel" id="bookmarkPanel" hidden>
+<div class="panel-heading"><h2>Bookmarks</h2><button class="close-panel" data-close="bookmarkPanel" type="button">×</button></div>
+<div id="bookmarkList" class="saved-list"></div>
+</section>
+<section class="list-panel" id="historyPanel" hidden>
+<div class="panel-heading"><h2>History</h2><button class="close-panel" data-close="historyPanel" type="button">×</button></div>
+<div id="historyList" class="saved-list"></div>
+</section>
 
-            <p class="security-note">Anti-abuse protection can be enabled server-side with rate limiting and reCAPTCHA keys.</p>
-            <footer>ProxyPlaza • GamePlaza ecosystem • <a href="https://gameplaza.vercel.app">GamePlaza</a></footer>
-        </main>
-    </div>
+<footer>ProxyPlaza • GamePlaza ecosystem</footer>
+</main>
+</div>
 
-    <div class="settings-overlay" id="settingsOverlay" hidden>
-        <div class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
-            <div class="panel-heading"><h2 id="settingsTitle">ProxyPlaza Settings</h2><button class="close-panel" id="closeSettings" type="button">×</button></div>
-            <label class="setting-row"><span>Theme</span><select id="themeSelect"><option value="plaza">Plaza Dark</option><option value="midnight">Midnight</option><option value="light">Light</option></select></label>
-            <label class="setting-row"><span>Save history</span><input id="historyToggle" type="checkbox" checked></label>
-            <label class="setting-row"><span>Reduce animations</span><input id="animationToggle" type="checkbox"></label>
-            <button id="saveSettings" type="button">Save Settings</button>
-        </div>
-    </div>
+<div class="settings-overlay" id="settingsOverlay" hidden>
+<div class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+<div class="panel-heading"><h2 id="settingsTitle">ProxyPlaza Settings</h2><button class="close-panel" id="closeSettings" type="button">×</button></div>
+<label class="setting-row"><span>Theme</span><select id="themeSelect"><option value="plaza">Plaza Dark</option><option value="midnight">Midnight</option><option value="light">Light</option></select></label>
+<label class="setting-row"><span>Save history</span><input id="historyToggle" type="checkbox" checked></label>
+<label class="setting-row"><span>Reduce animations</span><input id="animationToggle" type="checkbox"></label>
+<button id="saveSettings" type="button">Save Settings</button>
+</div>
+</div>
 </body>
 </html>
