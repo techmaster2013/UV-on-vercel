@@ -144,18 +144,14 @@ form?.addEventListener('submit', async (e) => {
     }
 
     const destination = __uv$config.prefix + __uv$config.encodeUrl(url);
-try {
-    if ('serviceWorker' in navigator && window.__uv$config?.sw) {
-        let registration = await navigator.serviceWorker.getRegistration(__uv$config.prefix);
-        if (!registration) {
-            registration = await navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix });
+    try {
+        if ('serviceWorker' in navigator && __uv$config.sw) {
+            const registration = await navigator.serviceWorker.getRegistration(__uv$config.prefix)
+                || await navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix });
+            await registration.update();
         }
-        await navigator.serviceWorker.ready;
-    }
-} catch (_) {
-    // Continue to the UV route; the browser may already have an active worker.
-}
-window.location.assign(destination);
+    } catch (_) {}
+    window.location.href = destination;
 });
 
 document.getElementById('whyBing')?.addEventListener('click', () => {
