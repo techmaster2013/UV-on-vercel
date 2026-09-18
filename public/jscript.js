@@ -112,7 +112,7 @@ document.getElementById('refreshButton')?.addEventListener('click', () => window
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         if (window.__uv$config) {
-            navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix })
+            navigator.serviceWorker.register('/uv/sw.js', { scope: __uv$config.prefix })
                 .catch(() => showError('Proxy service worker could not be registered.'));
         }
     });
@@ -148,7 +148,7 @@ try {
     if ('serviceWorker' in navigator && window.__uv$config?.sw) {
         let registration = await navigator.serviceWorker.getRegistration(__uv$config.prefix);
         if (!registration) {
-            registration = await navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix });
+            registration = await navigator.serviceWorker.register('/uv/sw.js', { scope: __uv$config.prefix });
         }
         await navigator.serviceWorker.ready;
     }
