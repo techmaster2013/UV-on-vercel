@@ -118,7 +118,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-form?.addEventListener('submit', (e) => {
+form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     showError('');
 
@@ -144,6 +144,17 @@ form?.addEventListener('submit', (e) => {
     }
 
     const destination = __uv$config.prefix + __uv$config.encodeUrl(url);
+try {
+    if ('serviceWorker' in navigator && window.__uv$config?.sw) {
+        let registration = await navigator.serviceWorker.getRegistration(__uv$config.prefix);
+        if (!registration) {
+            registration = await navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix });
+        }
+        await navigator.serviceWorker.ready;
+    }
+} catch (_) {
+    // Continue to the UV route; the browser may already have an active worker.
+}
 window.location.assign(destination);
 });
 
