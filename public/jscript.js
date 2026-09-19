@@ -67,7 +67,7 @@ const normalizeUrl = (value) => {
     let url = value.trim();
     if (!url.includes('.') || url.includes(' ')) {
         url = 'https://www.bing.com/search?q=' + encodeURIComponent(url);
-    } else if (!/^https?:\\/\\//i.test(url)) {
+    } else if (!/^https?:\/\//i.test(url)) {
         url = 'https://' + url;
     }
     return url;
