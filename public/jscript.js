@@ -103,6 +103,15 @@ const toggleBookmark = () => {
 bookmarkStar?.addEventListener('click', toggleBookmark);
 input?.addEventListener('input', updateBookmarkStar);
 
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        if (window.__uv$config) {
+            navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix })
+                .catch(err => console.error('UV service worker registration failed:', err));
+        }
+    });
+}
+
 document.getElementById('backButton')?.addEventListener('click', () => {
     if (history.length > 1) window.history.back();
     else showError('Nothing to go back to yet.');
