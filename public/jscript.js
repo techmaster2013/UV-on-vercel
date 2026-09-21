@@ -137,7 +137,8 @@ form?.addEventListener('submit', async (e) => {
     }
 
     const destination = __uv$config.prefix + __uv$config.encodeUrl(url);
-    window.location.href = destination;
+    await swReady;
+    window.location.assign(destination);
 });
 
 document.getElementById('whyBing')?.addEventListener('click', () => {
