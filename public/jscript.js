@@ -137,7 +137,6 @@ form?.addEventListener('submit', async (e) => {
     }
 
     const destination = __uv$config.prefix + __uv$config.encodeUrl(url);
-    await swReady;
     window.location.assign(destination);
 });
 
