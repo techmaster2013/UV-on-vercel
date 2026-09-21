@@ -103,13 +103,15 @@ const toggleBookmark = () => {
 bookmarkStar?.addEventListener('click', toggleBookmark);
 input?.addEventListener('input', updateBookmarkStar);
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        if (window.__uv$config) {
-            navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix })
-                .catch(err => console.error('UV service worker registration failed:', err));
-        }
-    });
+let uvReady = Promise.resolve();
+
+if ('serviceWorker' in navigator && window.__uv$config) {
+    uvReady = navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix })
+        .then(reg => navigator.serviceWorker.ready)
+        .catch(err => {
+            console.error('UV service worker registration failed:', err);
+            throw err;
+        });
 }
 
 document.getElementById('backButton')?.addEventListener('click', () => {
@@ -146,7 +148,13 @@ form?.addEventListener('submit', async (e) => {
     }
 
     const destination = __uv$config.prefix + __uv$config.encodeUrl(url);
-    window.location.assign(destination);
+
+    try {
+        await uvReady;
+        window.location.href = destination;
+    } catch (_) {
+        showError('Proxy service is still starting. Please press Enter again in a moment.');
+    }
 });
 
 document.getElementById('whyBing')?.addEventListener('click', () => {
