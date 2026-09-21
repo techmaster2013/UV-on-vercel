@@ -144,14 +144,20 @@ form?.addEventListener('submit', async (e) => {
     }
 
     const destination = __uv$config.prefix + __uv$config.encodeUrl(url);
-    try {
-        if ('serviceWorker' in navigator && __uv$config.sw) {
-            const registration = await navigator.serviceWorker.getRegistration(__uv$config.prefix)
-                || await navigator.serviceWorker.register(__uv$config.sw, { scope: __uv$config.prefix });
-            await registration.update();
-        }
-    } catch (_) {}
-    window.location.href = destination;
+
+    if ('serviceWorker' in navigator && __uv$config.sw) {
+        try {
+            let registration = await navigator.serviceWorker.getRegistration(__uv$config.prefix);
+            if (!registration) {
+                registration = await navigator.serviceWorker.register(__uv$config.sw, {
+                    scope: __uv$config.prefix
+                });
+            }
+            await navigator.serviceWorker.ready;
+        } catch (_) {}
+    }
+
+    window.location.assign(destination);
 });
 
 document.getElementById('whyBing')?.addEventListener('click', () => {
