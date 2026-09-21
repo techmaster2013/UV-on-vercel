@@ -11,7 +11,10 @@
 <link rel="stylesheet" href="style.css">
 <script src="/uv/uv.bundle.js" defer></script>
 <script src="/uv/uv.config.js" defer></script>
-<script src="jscript.js?v=5" defer></script>
+<script src="jscript.js?v=6" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{const f=document.getElementById("proxyForm"),i=document.getElementById("urlInput");f?.addEventListener("submit",e=>{e.preventDefault();const v=i.value.trim();if(!v)return;let u=v;if(!u.includes(".")||u.includes(" "))u="https://www.bing.com/search?q="+encodeURIComponent(u);else if(!/^https?:\/\//i.test(u))u="https://"+u;const go=()=>{if(window.__uv$config?.prefix&&window.__uv?.encodeUrl){location.assign(window.__uv.config.prefix+window.__uv.encodeUrl(u));return true}if(window.__uv$config?.prefix){location.assign(window.__uv.config.prefix+encodeURIComponent(u));return true}return false};if(!go()){let n=0;const t=setInterval(()=>{if(go()||++n>30){clearInterval(t)}},100)}});});
+</script>
 </head>
 <body>
 <canvas id="particles"></canvas>
